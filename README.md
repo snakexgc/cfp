@@ -62,7 +62,7 @@ Password is `maga2028`
 > 设置子域名的时候，请不要设置成类似于`proxy.example.com`的格式，因为在TLS握手的时候（会明文发送SNI），很容易被识别出这是一个代理服务。建议使用看起来更常规、无 / 假 特定含义的子域名，例如 `cdn.example.com` 或 `img.example.com` 等，以降低被识别的风险。
 
 > [!NOTE]  
-> 如果部署失败（重定向、报错 等），请尝试完全复制粘贴 `_worker.js` 的内容，如果还是不行请删除 worker 并新建一个。
+> 如果部署失败（重定向、报错 等），请参考 [FAQ](FAQ.md)
 
 # 安全密码
 安全密码利用Cookie，在设置了密码的情况下，会先检测是否有密码Cookie以及是否正确，如果不正确那么可以设置输入密码界面，或者直接403。密码Cookie默认名称为`passwordCookieName`，设置密码可以代码里搜索`const password = "";`并替换成你的密码。
@@ -96,6 +96,7 @@ MIT License + 一些条件<br>
 * 感谢 @since114514 参与我的一个小实验：成功从worker.js发现了一段注释 https://github.com/1234567Yang/cf-proxy-ex/issues/31 。
 * 感谢 @fangyuan99 通知我本项目其实还可以在Deno上部署 https://github.com/1234567Yang/cf-proxy-ex/issues/33 。
 * 感谢 @Tayasui-rainnya 提供的 UI https://github.com/1234567Yang/cf-proxy-ex/issues/44 。
+* 感谢 @Shift-Bloger 和 @Neurotoxin0 帮助发现 Cloudflare URL Normalization 无限重定向问题 https://github.com/1234567Yang/cf-proxy-ex/issues/63 。
 <!--* ~~非常非常非常感谢为我未来着想的学校管理员，把好多正常网站屏蔽了，否则这个项目就不存在了。此外，非常非常非常感谢学校管理员是让这个项目存在的原因（之一），能让我写在 College App 上~~-->
 
 # Star History
