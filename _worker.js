@@ -72,7 +72,7 @@ var original_website_host_with_schema = original_website_url_str.substring(0, or
 function changeURL(relativePath) {
     if (relativePath == null) return null;
 
-    relativePath_str = "";
+    let relativePath_str = "";
     if (relativePath instanceof URL) {
         relativePath_str = relativePath.href;
     } else {
@@ -477,6 +477,9 @@ function windowLocationInject() {
 function historyInject() {
     const originalPushState = History.prototype.pushState;
     const originalReplaceState = History.prototype.replaceState;
+    const originalBack = History.prototype.back;
+    const originalForward = History.prototype.forward;
+    const originalGo = History.prototype.go;
 
     History.prototype.pushState = function (state, title, url) {
         if (!url) return; //x.com 会有一次undefined
@@ -1273,8 +1276,8 @@ async function handleRequest(request) {
     // TODO: BUG：如果是加载了一个gb2515的界面，然后里面有application/javascript，然后js也是gb2515，但是它header里面没有，就会乱码
     let isText = false;
     let isTextDetectingKeyword = ["text/", "application/json", "application/javascript"]
-    isTextDetectingKeyword.forEach(x => {if(contentType.includes(x)) isText = true;})
-    if (contentType && isText) {
+    isTextDetectingKeyword.forEach(x => {if(contentType && contentType.includes(x)) isText = true;})
+    if (isText) { // contentType && 在上面已经有了
       
       const rawBytes = await response.arrayBuffer(); 
       let encoding = 'utf-8';
